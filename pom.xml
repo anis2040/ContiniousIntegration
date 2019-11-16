@@ -12,17 +12,6 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	
-	<parent>
-    <groupId>org.jenkins-ci</groupId>
-    <artifactId>jenkins</artifactId>
-    <version>1.52</version>
-    <relativePath />
-  </parent>
-
-  <groupId>org.jenkins-ci.main</groupId>
-  <artifactId>jenkins-parent</artifactId>
-  <version>${revision}${changelist}</version>
-  <packaging>pom</packaging>
 
 	<distributionManagement>
 		<repository>
