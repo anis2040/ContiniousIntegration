@@ -1,9 +1,11 @@
 pipeline {
-    agent any
-    tools { 
-        maven 'Maven 3.6.2' 
+    agent {
+        label "master"
     }
-    
+    tools {
+        // Note: this should match with the tool name configured in your jenkins instance (JENKINS_URL/configureTools/)
+        maven "Maven 3.6.2"
+    }
     environment {
         // This can be nexus3 or nexus2
         NEXUS_VERSION = "nexus3"
@@ -16,24 +18,34 @@ pipeline {
         // Jenkins credential id to authenticate to Nexus OSS
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
     }
-    
     stages {
-        stage('Checkout') {
+        stage("clone code") {
             steps {
-                git 'https://github.com/anis2040/ContiniousIntegration.git'
+                script {
+                    // Let's clone the source
+                    git 'https://github.com/anis2040/ContiniousIntegration.git';
+                }
             }
         }
-        stage('Build') {
+        stage("mvn build") {
             steps {
-               sh label: '', script: 'mvn install'
-   }
-        }
-        stage('Test') {
-            steps {
-               sh label: '', script: 'mvn test'
+                script {
+                    // If you are using Windows then you should use "bat" step
+                    // Since unit testing is out of the scope we skip them
+                    sh "mvn install"
+                }
             }
         }
-        stage("Deploy") {
+         stage("mvn test") {
+            steps {
+                script {
+                    // If you are using Windows then you should use "bat" step
+                    // Since unit testing is out of the scope we skip them
+                    sh "mvn test"
+                }
+            }
+        }
+        stage("publish to nexus") {
             steps {
                 script {
                     // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
