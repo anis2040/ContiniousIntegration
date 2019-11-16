@@ -20,7 +20,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/RansomGr/jekinsProject'
+                git 'https://github.com/anis2040/ContiniousIntegration.git'
             }
         }
         stage('Build') {
