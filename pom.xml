@@ -20,13 +20,17 @@
 		</dependency>
 	</dependencies>
 
-	<distributionManagement>
+		<distributionManagement>
 		<repository>
-			<id>nexus-releases</id>
-			<name>releases</name>
-			<url>http://localhost:8081/repository/nexus-releases/</url>
+		<id>nexus</id>
+		<name>maven-releases</name>
+		<url>http://localhost:8081/repository/maven-releases/</url>
 		</repository>
-	</distributionManagement>
-
+		<snapshotRepository>
+		<id>nexus</id>
+		<name>maven-snapshots</name>
+		<url>http://localhost:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		</distributionManagement>
 
 </project>
